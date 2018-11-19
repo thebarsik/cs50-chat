@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<style>
+    .chathistory {
+        height: 500px;
+        width: 95%;
+    }
+
+    .messagebox {
+        width: 95%;
+        height: 60px;
+    }
+
+    .sendbutton {
+        width: 20px;
+        height: 20px;
+    }
+</style>
+
+<html>
+    <head>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script src="{{ url_for('static', filename='channel.js') }}"></script>
+    </head>
+
+    <body>
+        <p> Welcome to {{ context.chatroomindex }} chatroom! </p> <span id="chtindex" data-chatroomindex = {{ context.chatroomindex }}></span>
+        <p> Please be polite to each other! </p>
+        <p> Chat history: </p>
+        <textarea type="text" id="chathistory" class = "chathistory" readonly="readonly"></textarea>
+        <p> Send a message: </p>
+        <textarea id="messagebox" class = "messagebox" autofocus="true"></textarea>
+        <p></p>
+        <button calss = "sendbutton" id = "messagesend" >Send!</button>
+</body>
+
+
+</html>

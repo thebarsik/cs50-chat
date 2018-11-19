@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <h1>Welcome!</h1>
+        <h2>Please choose one of the rooms and your username below!</h2>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script type="text/javascript">
+                document.addEventListener("DOMContentLoaded", function () {
+                    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+                    socket.on("connect", function () { 
+                        var keys = Object.keys(localStorage);
+                        socket.emit("retrieve_channel_list", { "channel_list" : keys });
+                    });
+                });
+
+        </script>
+
+        
+    </head>
+    
+    <body>
+        <form action="{{ url_for('chat_redirect')}}" method = "POST">
+            <h3>Choose a username:</h3>
+            <input type = "text" name = "username" placeholder = "Anonymus" default = "Anonymus">
+            <h3>Choose a channel to connect:</h3>
+            <select name="channellist">
+                {% for channel in context.active_channels %}
+                    <option value= {{ channel }}>{{ channel }}</option>
+                {% endfor %}
+            </select>
+            <button name = "submit_button" value = "join">Join!</button>
+            <h3>Or create one of your own!</h3>
+            <input type = "text" name = "channelname" placeholder = "Name of my channel">
+            <button name = "submit_button" value = "create">Create!</button>
+        </form> 
+
+    </body>
+
+
+
+
+
+</html>
